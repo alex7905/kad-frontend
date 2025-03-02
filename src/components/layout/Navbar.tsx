@@ -32,37 +32,28 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed md:left-0 top-0 w-full md:w-20 md:h-full bg-slate-900/50 backdrop-blur-lg border-b md:border-b-0 md:border-r border-white/10 z-50">
-      <div className="flex md:flex-col items-center h-full py-2 md:py-8 px-4 md:px-0">
-        {/* Logo for mobile */}
-        <Link href="/" className="mr-auto md:mr-0 md:mb-8">
-          <span className="text-primary-400 font-semibold text-lg md:hidden">KAD</span>
-          <span className="hidden md:block">
-            <HomeIcon className="w-6 h-6 text-primary-400" />
-          </span>
-        </Link>
-
-        <div className="flex md:flex-col items-center space-x-4 md:space-x-0 md:space-y-8 md:flex-1">
+    <nav className="md:fixed md:top-0 md:left-0 md:h-full md:w-20 fixed bottom-0 left-0 w-full h-16 bg-slate-900/50 backdrop-blur-lg md:border-r border-t md:border-t-0 border-white/10 z-50">
+      <div className="flex md:flex-col md:items-center md:h-full md:py-8 h-full items-center justify-around px-4 md:px-0">
+        <div className="flex md:flex-col md:space-y-8 md:space-x-0 space-x-4 items-center">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className={`flex items-center p-2 md:p-3 rounded-xl transition-all duration-200 ${
+              className={`block p-3 rounded-xl transition-all duration-200 ${
                 router.pathname === item.href
                   ? 'bg-primary-500/20 text-primary-400'
                   : 'text-slate-400 hover:bg-primary-500/10 hover:text-primary-300'
               }`}
             >
               <item.icon className="w-6 h-6" />
-              <span className="ml-2 text-sm md:hidden">{item.name}</span>
-              <span className="hidden md:sr-only">{item.name}</span>
+              <span className="sr-only">{item.name}</span>
             </Link>
           ))}
         </div>
 
-        <div className="flex md:flex-col items-center space-x-4 md:space-x-0 md:space-y-4">
+        <div className="space-y-4 md:space-y-0 md:flex md:justify-end md:items-center">
           <button
-            className="p-2 md:p-3 text-slate-400 hover:text-primary-300 transition-colors"
+            className="p-3 text-slate-400 hover:text-primary-300 transition-colors"
             onClick={() => router.push('/notifications')}
           >
             <div className="relative">
@@ -77,7 +68,7 @@ const Navbar = () => {
 
           <button
             onClick={logout}
-            className="p-2 md:p-3 text-slate-400 hover:text-primary-300 transition-colors"
+            className="p-3 text-slate-400 hover:text-primary-300 transition-colors"
           >
             <ArrowRightOnRectangleIcon className="w-6 h-6" />
             <span className="sr-only">Logout</span>
@@ -88,4 +79,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar; 
