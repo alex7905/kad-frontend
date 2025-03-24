@@ -32,14 +32,38 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="md:fixed md:top-0 md:left-0 md:h-full md:w-20 fixed bottom-0 left-0 w-full h-16 bg-slate-900/50 backdrop-blur-lg md:border-r border-t md:border-t-0 border-white/10 z-50">
-      <div className="flex md:flex-col md:items-center md:h-full md:py-8 h-full items-center justify-around px-4 md:px-0">
-        <div className="flex md:flex-col md:space-y-8 md:space-x-0 space-x-4 items-center">
+    <nav className="fixed top-0 left-0 w-full h-16 bg-slate-900/50 backdrop-blur-lg border-b border-white/10 z-50 md:h-full md:w-20">
+      <div className="flex items-center justify-between h-full px-4 mx-auto md:flex-col md:h-full md:py-8">
+        <div className="flex items-center space-x-4 md:flex-col md:space-x-0 md:space-y-8 w-full">
+          {/* User actions at the top */}
+          <div className="flex items-center justify-between w-full md:flex-col md:space-y-4">
+            <button
+              className="p-3 text-slate-400 hover:text-primary-300 transition-colors relative"
+              onClick={() => router.push('/notifications')}
+            >
+              <BellIcon className="w-6 h-6" />
+              {unreadNotifications > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-accent-500 rounded-full text-xs flex items-center justify-center text-white">
+                  {unreadNotifications}
+                </span>
+              )}
+            </button>
+
+            <button
+              onClick={logout}
+              className="p-3 text-slate-400 hover:text-primary-300 transition-colors flex items-center space-x-2"
+            >
+              <ArrowRightOnRectangleIcon className="w-6 h-6" />
+              <span className="hidden md:inline">Logout</span>
+            </button>
+          </div>
+
+          {/* Navigation links */}
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className={`block p-3 rounded-xl transition-all duration-200 ${
+              className={`flex items-center p-3 rounded-xl transition-all duration-200 ${
                 router.pathname === item.href
                   ? 'bg-primary-500/20 text-primary-400'
                   : 'text-slate-400 hover:bg-primary-500/10 hover:text-primary-300'
@@ -50,33 +74,9 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-
-        <div className="space-y-4 md:space-y-0 md:flex md:justify-end md:items-center">
-          <button
-            className="p-3 text-slate-400 hover:text-primary-300 transition-colors"
-            onClick={() => router.push('/notifications')}
-          >
-            <div className="relative">
-              <BellIcon className="w-6 h-6" />
-              {unreadNotifications > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-accent-500 rounded-full text-xs flex items-center justify-center text-white">
-                  {unreadNotifications}
-                </span>
-              )}
-            </div>
-          </button>
-
-          <button
-            onClick={logout}
-            className="p-3 text-slate-400 hover:text-primary-300 transition-colors"
-          >
-            <ArrowRightOnRectangleIcon className="w-6 h-6" />
-            <span className="sr-only">Logout</span>
-          </button>
-        </div>
       </div>
     </nav>
   );
 };
 
-export default Navbar; 
+export default Navbar;
